@@ -105,7 +105,7 @@ def measure_performance(X, y, clf ,show_accuracy=True, show_classification_repor
 measure_performance(X_train, y_train, clf, show_classification_report=False, show_confusion_matrix=False,label="Train")
 measure_performance(X_test, y_test, clf ,show_classification_report=False, show_confusion_matrix=False,label="Test")
 
-
+"""
 def loo_cv(X_train,y_train, clf ,label="" ):
     # Perform Leave-One-Out cross validation
     # We are preforming 1313 classifications!
@@ -122,7 +122,7 @@ def loo_cv(X_train,y_train, clf ,label="" ):
 
 loo_cv(X_train, y_train, clf,label="Train")
 loo_cv(X_test, y_test, clf,label="Test")
-
+"""
 
 """ Ranadom Forest"""
 print(">>>>> Random Forest")
@@ -131,8 +131,8 @@ print(">>>>> Random Forest")
 from sklearn.ensemble import RandomForestClassifier
 clf = RandomForestClassifier(n_estimators=10,random_state=33)
 clf = clf.fit(X_train,y_train)
-loo_cv(X_train,y_train,clf,label="Train")
-loo_cv(X_test,y_test,clf,label="Test")
+# loo_cv(X_train,y_train,clf,label="Train")
+# loo_cv(X_test,y_test,clf,label="Test")
 
 
 clf_dt=tree.DecisionTreeClassifier(criterion='entropy', max_depth=3,min_samples_leaf=5)
