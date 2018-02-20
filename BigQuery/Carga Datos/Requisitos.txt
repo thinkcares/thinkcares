@@ -1,0 +1,2 @@
+instalar sed como variable de ambiente
+instalar 7zip y dejarlo como variable de ambiente
