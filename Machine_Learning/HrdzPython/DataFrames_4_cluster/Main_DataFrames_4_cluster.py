@@ -6,9 +6,12 @@ query = """
 SELECT * FROM stg.data_4_cluster_20180130 
   """
 df = pd.read_gbq(query=query,project_id="mx-herdez-analytics",private_key='BigQuery/mx-herdez-analytics-cf83fcf5fcc3.json')
-
+# Se crean 2 listas
+# 1) contendrá los datos por día (todos)
+# 2) el otro contendra por día una muestra random del 10 % por día
 dic_df={}
 dic_df_random={}
+
 # print(df)
 
 dias={1,2,3,4,5,6,7,8}
