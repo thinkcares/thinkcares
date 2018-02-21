@@ -1,3 +1,5 @@
+gcloud init
+
 bq rm -f -t sethdzqa.movto_banca_diario
 bq rm -f -t sethdzqa.hist_movto_banca_e
 bq rm -f -t sethdzqa.BITACORA_ACT_CHEQUERA
