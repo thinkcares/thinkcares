@@ -10,6 +10,7 @@ def run_training():
     with tf.Session() as sess:
         # Add the variable initializer Op.
         # tf.global_variables_initializer()
+
         tf.initialize_all_variables().run()
         print(sess.run(y, feed_dict={x: 1.0}))
         print(sess.run(y, feed_dict={x: 2.0}))

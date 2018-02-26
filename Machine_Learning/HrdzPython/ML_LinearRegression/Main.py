@@ -21,8 +21,8 @@ print(bos.describe())
 X = bos.drop('PRICE', axis = 1)
 Y = bos['PRICE']
 
-from sklearn.cross_validation import train_test_split
-X_train, X_test, Y_train, Y_test = sklearn.cross_validation.train_test_split(X, Y, test_size = 0.33, random_state = 5)
+from sklearn.model_selection import train_test_split
+X_train, X_test, Y_train, Y_test = sklearn.model_selection.train_test_split(X, Y, test_size = 0.33, random_state = 5)
 print(X_train.shape)
 print(X_test.shape)
 print(Y_train.shape)
@@ -39,6 +39,7 @@ plt.scatter(Y_test, Y_pred)
 plt.xlabel("Prices: $Y_i$")
 plt.ylabel("Predicted prices: $\hat{Y}_i$")
 plt.title("Prices vs Predicted prices: $Y_i$ vs $\hat{Y}_i$")
+plt.show()
 
 mse = sklearn.metrics.mean_squared_error(Y_test, Y_pred)
 print(mse)
