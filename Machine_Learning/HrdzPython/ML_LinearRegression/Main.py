@@ -1,36 +1,44 @@
-print("Christian")
-
 #Loading libraries and data:
 
 import numpy as np
+import pandas as pd
+import scipy.stats as stats
 import matplotlib.pyplot as plt
+import sklearn
 from sklearn.datasets import load_boston
 boston = load_boston()
 print (boston.data.shape)
+print (boston.target.shape)
 print (boston.feature_names)
 print (np.max(boston.target),np.min(boston.target),np.mean(boston.target))
+bos = pd.DataFrame(boston.data)
+bos.columns = boston.feature_names
+bos['PRICE'] = boston.target
+print(bos.head())
+print(bos.describe())
+##print(boston.DESCR)
 
-# Slicing learning set into training and testing datasets:
+X = bos.drop('PRICE', axis = 1)
+Y = bos['PRICE']
 
 from sklearn.cross_validation import train_test_split
-X_train, X_test, y_train, y_test=train_test_split(boston.data,boston.target,test_size=0.25,random_state=33)
+X_train, X_test, Y_train, Y_test = sklearn.cross_validation.train_test_split(X, Y, test_size = 0.33, random_state = 5)
+print(X_train.shape)
+print(X_test.shape)
+print(Y_train.shape)
+print(Y_test.shape)
 
-#Normalizing the data:
+from sklearn.linear_model import LinearRegression
 
-from sklearn.preprocessing import StandardScaler
-scalerX=StandardScaler().fit(X_train)
-scalery=StandardScaler().fit(y_train)
-X_train=scalerX.transform(X_train)
-y_train=scalery.transform(y_train)
-X_test=scalerX.transform(X_test)
-y_test=scalery.transform(y_test)
+lm = LinearRegression()
+lm.fit(X_train, Y_train)
 
+Y_pred = lm.predict(X_test)
 
+plt.scatter(Y_test, Y_pred)
+plt.xlabel("Prices: $Y_i$")
+plt.ylabel("Predicted prices: $\hat{Y}_i$")
+plt.title("Prices vs Predicted prices: $Y_i$ vs $\hat{Y}_i$")
 
-
-
-
-
-
-
-
+mse = sklearn.metrics.mean_squared_error(Y_test, Y_pred)
+print(mse)
