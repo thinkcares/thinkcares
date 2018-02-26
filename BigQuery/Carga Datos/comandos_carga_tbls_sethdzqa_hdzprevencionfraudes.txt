@@ -1,0 +1,213 @@
+gcloud init
+
+bq rm -f -t sethdzqa.movto_banca_diario
+bq rm -f -t sethdzqa.hist_movto_banca_e
+bq rm -f -t sethdzqa.BITACORA_ACT_CHEQUERA
+bq rm -f -t sethdzqa.caja_usuario
+bq rm -f -t sethdzqa.cat_banco
+bq rm -f -t sethdzqa.cat_caja
+bq rm -f -t sethdzqa.cat_estatus
+bq rm -f -t sethdzqa.cat_forma_pago
+bq rm -f -t sethdzqa.cat_grupo_cupo
+bq rm -f -t sethdzqa.cat_grupo_flujo
+bq rm -f -t sethdzqa.cat_rubro
+bq rm -f -t sethdzqa.cat_usuario
+bq rm -f -t sethdzqa.concilia_banco
+bq rm -f -t sethdzqa.cruce_concilia
+bq rm -f -t sethdzqa.ctas_banco
+bq rm -f -t sethdzqa.det_arch_transfer
+bq rm -f -t sethdzqa.detalle_pago_as400
+bq rm -f -t sethdzqa.empresa
+bq rm -f -t sethdzqa.grupo_empresa
+bq rm -f -t sethdzqa.hist_movimiento
+bq rm -f -t sethdzqa.hist_solicitud
+bq rm -f -t sethdzqa.movimiento
+bq rm -f -t sethdzqa.movto_banca_e
+bq rm -f -t sethdzqa.persona
+bq rm -f -t sethdzqa.seleccion_automatica_grupo
+bq rm -f -t sethdzqa.set006
+bq rm -f -t sethdzqa.usuario_empresa
+bq rm -f -t sethdzqa.zexp_fact
+bq rm -f -t sethdzqa.zimp_fact
+
+cd /tmp
+
+sqlcmd -S 192.168.200.13 -E -i  "movto_banca_diario.sql" -o "movto_banca_diario.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "hist_movto_banca_e.sql" -o "hist_movto_banca_e.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_caja.sql" -o "cat_caja.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "movto_banca_e.sql" -o "movto_banca_e.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "BITACORA_ACT_CHEQUERA.sql" -o "BITACORA_ACT_CHEQUERA.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "caja_usuario.sql" -o "caja_usuario.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_banco.sql" -o "cat_banco.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_estatus.sql" -o "cat_estatus.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_forma_pago.sql" -o "cat_forma_pago.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_grupo_cupo.sql" -o "cat_grupo_cupo.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_grupo_flujo.sql" -o "cat_grupo_flujo.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_rubro.sql" -o "cat_rubro.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cat_usuario.sql" -o "cat_usuario.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "concilia_banco.sql" -o "concilia_banco.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "cruce_concilia.sql" -o "cruce_concilia.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "ctas_banco.sql" -o "ctas_banco.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "det_arch_transfer.sql" -o "det_arch_transfer.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "detalle_pago_as400.sql" -o "detalle_pago_as400.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "empresa.sql" -o "empresa.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "grupo_empresa.sql" -o "grupo_empresa.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "hist_movimiento.sql" -o "hist_movimiento.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "hist_solicitud.sql" -o "hist_solicitud.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "movimiento.sql" -o "movimiento.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "persona.sql" -o "persona.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "seleccion_automatica_grupo.sql" -o "seleccion_automatica_grupo.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "SET006.sql" -o "SET006.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "usuario_empresa.sql" -o "usuario_empresa.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "zexp_fact.sql" -o "zexp_fact.csv" -h-1 -s"|" -W
+sqlcmd -S 192.168.200.13 -E -i  "zimp_fact.sql" -o "zimp_fact.csv" -h-1 -s"|" -W
+
+
+sed -i".bck" "s/\NULL//g" movto_banca_diario.csv
+sed -i".bck" "s/\NULL//g" hist_movto_banca_e.csv
+sed -i".bck" "s/\NULL//g" cat_caja.csv
+sed -i".bck" "s/\NULL//g" movto_banca_e.csv
+sed -i".bck" "s/\NULL//g" BITACORA_ACT_CHEQUERA.csv
+sed -i".bck" "s/\NULL//g" caja_usuario.csv
+sed -i".bck" "s/\NULL//g" cat_banco.csv
+sed -i".bck" "s/\NULL//g" cat_estatus.csv
+sed -i".bck" "s/\NULL//g" cat_forma_pago.csv
+sed -i".bck" "s/\NULL//g" cat_grupo_cupo.csv
+sed -i".bck" "s/\NULL//g" cat_grupo_flujo.csv
+sed -i".bck" "s/\NULL//g" cat_rubro.csv
+sed -i".bck" "s/\NULL//g" cat_usuario.csv
+sed -i".bck" "s/\NULL//g" concilia_banco.csv
+sed -i".bck" "s/\NULL//g" cruce_concilia.csv
+sed -i".bck" "s/\NULL//g" ctas_banco.csv
+sed -i".bck" "s/\NULL//g" det_arch_transfer.csv
+sed -i".bck" "s/\NULL//g" detalle_pago_as400.csv
+sed -i".bck" "s/\NULL//g" empresa.csv
+sed -i".bck" "s/\NULL//g" grupo_empresa.csv
+sed -i".bck" "s/\NULL//g" hist_movimiento.csv
+sed -i".bck" "s/\NULL//g" hist_solicitud.csv
+sed -i".bck" "s/\NULL//g" movimiento.csv
+sed -i".bck" "s/\NULL//g" persona.csv
+sed -i".bck" "s/\NULL//g" seleccion_automatica_grupo.csv
+sed -i".bck" "s/\NULL//g" SET006.csv
+sed -i".bck" "s/\NULL//g" usuario_empresa.csv
+sed -i".bck" "s/\NULL//g" zexp_fact.csv
+sed -i".bck" "s/\NULL//g" zimp_fact.csv
+
+del sed*.*
+
+
+
+7z a -tgzip movto_banca_diario.csv.gz movto_banca_diario.csv -MX3
+7z a -tgzip hist_movto_banca_e.csv.gz hist_movto_banca_e.csv -MX3
+7z a -tgzip cat_caja.csv.gz cat_caja.csv -MX3
+7z a -tgzip movto_banca_e.csv.gz movto_banca_e.csv -MX3
+7z a -tgzip BITACORA_ACT_CHEQUERA.csv.gz BITACORA_ACT_CHEQUERA.csv -MX3
+7z a -tgzip caja_usuario.csv.gz caja_usuario.csv -MX3
+7z a -tgzip cat_banco.csv.gz cat_banco.csv -MX3
+7z a -tgzip cat_estatus.csv.gz cat_estatus.csv -MX3
+7z a -tgzip cat_forma_pago.csv.gz cat_forma_pago.csv -MX3
+7z a -tgzip cat_grupo_cupo.csv.gz cat_grupo_cupo.csv -MX3
+7z a -tgzip cat_grupo_flujo.csv.gz cat_grupo_flujo.csv -MX3
+7z a -tgzip cat_rubro.csv.gz cat_rubro.csv -MX3
+7z a -tgzip cat_usuario.csv.gz cat_usuario.csv -MX3
+7z a -tgzip concilia_banco.csv.gz concilia_banco.csv -MX3
+7z a -tgzip cruce_concilia.csv.gz cruce_concilia.csv -MX3
+7z a -tgzip ctas_banco.csv.gz ctas_banco.csv -MX3
+7z a -tgzip det_arch_transfer.csv.gz det_arch_transfer.csv -MX3
+7z a -tgzip detalle_pago_as400.csv.gz detalle_pago_as400.csv -MX3
+7z a -tgzip empresa.csv.gz empresa.csv -MX3
+7z a -tgzip grupo_empresa.csv.gz grupo_empresa.csv -MX3
+7z a -tgzip hist_movimiento.csv.gz hist_movimiento.csv -MX3
+7z a -tgzip hist_solicitud.csv.gz hist_solicitud.csv -MX3
+7z a -tgzip movimiento.csv.gz movimiento.csv -MX3
+7z a -tgzip persona.csv.gz persona.csv -MX3
+7z a -tgzip seleccion_automatica_grupo.csv.gz seleccion_automatica_grupo.csv -MX3
+7z a -tgzip SET006.csv.gz SET006.csv -MX3
+7z a -tgzip usuario_empresa.csv.gz usuario_empresa.csv -MX3
+7z a -tgzip zexp_fact.csv.gz zexp_fact.csv -MX3
+7z a -tgzip zimp_fact.csv.gz zimp_fact.csv -MX3
+
+del *.csv
+del *.bck
+
+
+gsutil cp movto_banca_diario.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp hist_movto_banca_e.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_caja.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp BITACORA_ACT_CHEQUERA.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp caja_usuario.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_banco.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_estatus.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_forma_pago.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_grupo_cupo.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_grupo_flujo.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_rubro.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cat_usuario.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp concilia_banco.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp cruce_concilia.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp ctas_banco.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp det_arch_transfer.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp detalle_pago_as400.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp empresa.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp grupo_empresa.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp hist_movimiento.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp hist_solicitud.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp movimiento.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp persona.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp seleccion_automatica_grupo.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp SET006.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp usuario_empresa.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp zexp_fact.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp zimp_fact.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+gsutil cp movto_banca_e.csv.gz  gs://bbp_carga_txt/CsvFilesSet/
+
+
+
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.hist_movto_banca_e gs://bbp_carga_txt/CsvFilesSet/hist_movto_banca_e.csv.gz no_empresa:INTEGER,id_banco:INTEGER,id_chequera:STRING,secuencia:INTEGER,fec_valor:TIMESTAMP,sucursal:STRING,folio_banco:STRING,referencia:STRING,cargo_abono:STRING,importe:FLOAT,b_salvo_buen_cobro:STRING,concepto:STRING,id_estatus_trasp:STRING,fec_alta:TIMESTAMP,b_trasp_banco:STRING,b_trasp_conta:STRING,movto_arch:INTEGER,observacion:STRING,b_trasp_bc:STRING,id_rubro:FLOAT,usuario_alta:INTEGER,descripcion:STRING,archivo:STRING,estatus_exp:STRING,fec_concilia_caja:TIMESTAMP,saldo_bancario:FLOAT,id_cve_concepto:STRING,folio_det_conf:INTEGER,no_linea_arch:INTEGER,id_estatus_cancela:INTEGER,id_estatus_barrido:STRING,estatus:STRING,fec_operacion:TIMESTAMP,fec_exportacion:TIMESTAMP,plaza_deposito:STRING,no_folio_cobranza:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.movto_banca_diario gs://bbp_carga_txt/CsvFilesSet/movto_banca_diario.csv.gz no_empresa:INTEGER,id_banco:INTEGER,id_chequera:STRING,secuencia:INTEGER,fec_valor:TIMESTAMP,sucursal:STRING,folio_banco:STRING,referencia:STRING,cargo_abono:STRING,importe:FLOAT,b_salvo_buen_cobro:STRING,concepto:STRING,id_estatus_trasp:STRING,fec_alta:TIMESTAMP,b_trasp_banco:STRING,b_trasp_conta:STRING,movto_arch:INTEGER,observacion:STRING,b_trasp_bc:STRING,id_rubro:FLOAT,usuario_alta:INTEGER,descripcion:STRING,archivo:STRING,estatus_exp:STRING,fec_concilia_caja:TIMESTAMP,saldo_bancario:FLOAT,id_cve_concepto:STRING,folio_det_conf:INTEGER,no_linea_arch:INTEGER,id_estatus_cancela:INTEGER,id_estatus_barrido:STRING,estatus:STRING,fec_operacion:TIMESTAMP,fec_exportacion:TIMESTAMP,plaza_deposito:STRING,no_folio_cobranza:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_caja gs://bbp_carga_txt/CsvFilesSet/cat_caja.csv.gz id_caja:INTEGER,desc_caja:STRING,ubicacion:STRING,b_activa:STRING,equivale_banco:INTEGER,fondo_fijo_mn:FLOAT,fondo_fijo_dls:FLOAT,b_abrir_caja:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.movto_banca_e gs://bbp_carga_txt/CsvFilesSet/movto_banca_e.csv.gz no_empresa:INTEGER,id_banco:INTEGER,id_chequera:STRING,secuencia:INTEGER,fec_valor:TIMESTAMP,sucursal:STRING,folio_banco:STRING,referencia:STRING,cargo_abono:STRING,importe:FLOAT,b_salvo_buen_cobro:STRING,concepto:STRING,id_estatus_trasp:STRING,fec_alta:TIMESTAMP,b_trasp_banco:STRING,b_trasp_conta:STRING,movto_arch:INTEGER,observacion:STRING,b_trasp_bc:STRING,id_rubro:FLOAT,usuario_alta:INTEGER,descripcion:STRING,archivo:STRING,estatus_exp:STRING,fec_concilia_caja:TIMESTAMP,saldo_bancario:FLOAT,id_cve_concepto:STRING,folio_det_conf:INTEGER,no_linea_arch:INTEGER,id_estatus_cancela:INTEGER,id_estatus_barrido:STRING,estatus:STRING,fec_operacion:TIMESTAMP,fec_exportacion:TIMESTAMP,plaza_deposito:STRING,no_folio_cobranza:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.BITACORA_ACT_CHEQUERA gs://bbp_carga_txt/CsvFilesSet/BITACORA_ACT_CHEQUERA.csv.gz no_persona:INTEGER,fec_modif:TIMESTAMP,id_banco_ant:INTEGER,id_chequera_ant:STRING,id_banco_actual:INTEGER,id_chequera_actual:STRING,no_folio_det:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.caja_usuario gs://bbp_carga_txt/CsvFilesSet/caja_usuario.csv.gz no_usuario:INTEGER,id_caja:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_banco gs://bbp_carga_txt/CsvFilesSet/cat_banco.csv.gz id_banco:INTEGER,desc_banco:STRING,cve_plaza:STRING,codigo_seguridad:STRING,id_banco_cecoban:INTEGER,path_protegido:STRING,arch_protegido:STRING,fec_protegido:STRING,no_protegido:INTEGER,b_operacion:STRING,fec_alta:TIMESTAMP,usuario_alta:INTEGER,fec_modif:TIMESTAMP,usuario_modif:INTEGER,b_cheque_elect:STRING,nac_ext:STRING,b_banca_elect:STRING,inst_finan:STRING,id_banco_city:STRING,b_protegido:STRING,b_cheque_ocurre:STRING,id_banco_bancomer:INTEGER,libera_aut:STRING,hora_libera:STRING,b_saldo_banco:STRING,usuario_BE:STRING,plaza_ext:STRING,b_layout_comerica:STRING,dir_logo:STRING,desc_banco_inbursa:STRING,valida_CLABE:STRING,transfer_casa_cambio:STRING,validado_aba:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_estatus gs://bbp_carga_txt/CsvFilesSet/cat_estatus.csv.gz id_estatus:STRING,clasificacion:STRING,desc_estatus:STRING,secuencia:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_forma_pago gs://bbp_carga_txt/CsvFilesSet/cat_forma_pago.csv.gz id_forma_pago:INTEGER,desc_forma_pago:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_grupo_cupo gs://bbp_carga_txt/CsvFilesSet/cat_grupo_cupo.csv.gz id_grupo_cupo:INTEGER,desc_grupo_cupo:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_grupo_flujo gs://bbp_carga_txt/CsvFilesSet/cat_grupo_flujo.csv.gz id_grupo_flujo:INTEGER,desc_grupo_flujo:STRING,correo_empresa:STRING,remitente_correo:STRING,nivel_autorizacion:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_rubro gs://bbp_carga_txt/CsvFilesSet/cat_rubro.csv.gz id_grupo:FLOAT,id_rubro:FLOAT,desc_rubro:STRING,ingreso_egreso:STRING,id_rubro_equivale:FLOAT,b_contabiliza:STRING,equivale_RP:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cat_usuario gs://bbp_carga_txt/CsvFilesSet/cat_usuario.csv.gz no_usuario:INTEGER,paterno:STRING,materno:STRING,nombre:STRING,id_caja:INTEGER,no_empresa:INTEGER,folio_control:INTEGER,v_huella:STRING,id_usuario_seg:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.concilia_banco gs://bbp_carga_txt/CsvFilesSet/concilia_banco.csv.gz no_empresa:INTEGER,id_banco:INTEGER,id_chequera:STRING,secuencia:FLOAT,id_estatus_cb:STRING,fec_operacion:TIMESTAMP,importe:FLOAT,id_divisa:STRING,cargo_abono:STRING,concepto:STRING,referencia:STRING,aclaracion:STRING,responsable:STRING,no_cheque:STRING,no_cheque_tmp:STRING,FOLIO_BANCO:STRING,DESCRIPCION:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.cruce_concilia gs://bbp_carga_txt/CsvFilesSet/cruce_concilia.csv.gz grupo:INTEGER,secuencia:FLOAT,no_folio_1:FLOAT,no_folio_2:FLOAT,fuente_movto:STRING,tipo_concilia:STRING,fec_alta:TIMESTAMP,usuario_alta:INTEGER,no_empresa:INTEGER,id_banco:INTEGER,id_chequera:STRING,fec_exporta:TIMESTAMP
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.ctas_banco gs://bbp_carga_txt/CsvFilesSet/ctas_banco.csv.gz no_empresa:INTEGER,no_persona:INTEGER,id_chequera:STRING,id_banco:INTEGER,desc_chequera:STRING,sucursal:INTEGER,plaza:INTEGER,usuario_modif:INTEGER,fec_modif:TIMESTAMP,id_chequera_ant:STRING,id_divisa:STRING,complemento:STRING,swift_code:STRING,aba:STRING,especiales:STRING,id_tipo_persona:STRING,id_bank_true:INTEGER,id_bank_corresponding:INTEGER,id_chequera_true:STRING,id_clabe:STRING,id_banco_anterior:INTEGER,id_chequera_anterior:STRING,tipo_envio_layout:STRING,aba_intermediario:STRING,swift_intermediario:STRING,aba_corresponsal:STRING,swift_corresponsal:STRING,referencia:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.det_arch_transfer gs://bbp_carga_txt/CsvFilesSet/det_arch_transfer.csv.gz nom_arch:STRING,no_folio_det:INTEGER,no_docto:STRING,id_estatus_arch:STRING,fec_valor:TIMESTAMP,id_chequera:STRING,id_banco:INTEGER,id_banco_benef:INTEGER,id_chequera_benef:STRING,prefijo_benef:STRING,importe:FLOAT,beneficiario:STRING,sucursal:INTEGER,plaza:INTEGER,concepto:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.detalle_pago_as400 gs://bbp_carga_txt/CsvFilesSet/detalle_pago_as400.csv.gz no_empresa:STRING,no_doc_sap:STRING,secuencia:STRING,fec_fact:STRING,no_factura:STRING,fec_valor:STRING,no_benef:STRING,importe:FLOAT,imp_solic:FLOAT,id_divisa:STRING,concepto:STRING,forma_pago:INTEGER,cve_leyen:INTEGER,benef_alt:STRING,id_bco_alt:FLOAT,id_chq_alt:STRING,id_rubro:FLOAT,gpo_tesor:FLOAT,cod_bloq:STRING,mandante:STRING,ind_may_es:STRING,division:STRING,ind_iva:STRING,centro_cto:FLOAT,rfc:STRING,tipo_camb:FLOAT,id_caja:INTEGER,contra_rec:STRING,fecha_imp:STRING,fecha_exp:STRING,estatus:STRING,causa_rech:STRING,origen:STRING,estatus_compensa:STRING,estatus_proceso:STRING,email_alt:STRING,clabe:STRING,desc_propuesta:STRING,banco_pagador:INTEGER,chequera_pagadora:STRING,fec_propuesta:STRING,id_area:INTEGER,no_prov_as400:STRING,forma_pago_original:INTEGER,no_fact_rel:STRING,tipo_orden:STRING,val_tipo_orden:INTEGER,usuario_revisa:STRING,fec_venc_docto:STRING,tipo_docto_as400:STRING,tipo_agrupacion:STRING,docs_original:STRING,docs_copias:STRING,fec_recep_org:TIMESTAMP,fec_recep_rechazado:TIMESTAMP,estatus_ac:STRING,usu_revisa:INTEGER,usuario_1:INTEGER,usuario_2:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.empresa gs://bbp_carga_txt/CsvFilesSet/empresa.csv.gz no_empresa:INTEGER,fec_constitucion:TIMESTAMP,fec_autoriza_cnbv:TIMESTAMP,valor_accion:FLOAT,prima_accion_adicional:FLOAT,capitalizacion:FLOAT,dividendos:FLOAT,porc_seguro_deudor:FLOAT,no_cuenta_emp:INTEGER,no_linea_emp:INTEGER,comision_che_dev:FLOAT,nom_empresa:STRING,arch_logo:STRING,emp_che:INTEGER,multiempresa:STRING,fec_alta:TIMESTAMP,usuario_alta:INTEGER,fec_modif:TIMESTAMP,usuario_modif:INTEGER,b_control_bancario:STRING,b_concentradora:STRING,no_controladora:INTEGER,id_grupo_flujo:INTEGER,b_cxc:STRING,dir_logo:STRING,dir_logo_alterno:STRING,id_caja:INTEGER,id_contrato_tef:INTEGER,b_division:STRING,id_contrato_mass:INTEGER,b_pag_cruzados_aut:STRING,benef_nafin:STRING,id_usuario_bital:INTEGER,id_servicio_bital:INTEGER,id_contrato_wlink:STRING,b_local:STRING,b_activa:STRING,institucion_financiera:FLOAT,pagadora:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.grupo_empresa gs://bbp_carga_txt/CsvFilesSet/grupo_empresa.csv.gz no_empresa:INTEGER,id_grupo_flujo:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.hist_movimiento gs://bbp_carga_txt/CsvFilesSet/hist_movimiento.csv.gz no_empresa:INTEGER,no_folio_det:INTEGER,no_folio_mov:INTEGER,id_tipo_operacion:INTEGER,id_cve_operacion:INTEGER,id_tipo_saldo:INTEGER,no_linea:INTEGER,id_inv_cbolsa:INTEGER,no_cuenta:INTEGER,id_estatus_mov:STRING,no_cheque:INTEGER,id_chequera:STRING,id_banco:INTEGER,id_forma_pago:INTEGER,importe:FLOAT,importe_original:FLOAT,b_salvo_buen_cobro:STRING,id_tipo_docto:INTEGER,no_docto:STRING,valor_tasa:FLOAT,fec_operacion:TIMESTAMP,fec_valor:TIMESTAMP,fec_valor_original:TIMESTAMP,fec_recalculo:TIMESTAMP,folio_ref:INTEGER,dias_inv:INTEGER,id_tipo_movto:STRING,id_caja:INTEGER,id_divisa:STRING,id_divisa_original:STRING,fec_exportacion:TIMESTAMP,fec_reimprime:TIMESTAMP,fec_imprime:TIMESTAMP,fec_cheque:TIMESTAMP,lote_entrada:INTEGER,lote_salida:INTEGER,referencia:STRING,folio_banco:STRING,beneficiario:STRING,id_leyenda:STRING,id_banco_benef:INTEGER,id_chequera_benef:STRING,concepto:STRING,id_contable:STRING,folio_seg:INTEGER,arch_protegido:STRING,usuario_imprime:INTEGER,fec_alta:TIMESTAMP,usuario_alta:INTEGER,fec_modif:TIMESTAMP,usuario_modif:INTEGER,no_cuenta_ref:INTEGER,id_estatus_cb:STRING,id_estatus_cc:STRING,no_cliente:STRING,no_cobrador:INTEGER,sucursal:INTEGER,plaza:INTEGER,observacion:STRING,no_recibo:INTEGER,origen_mov:STRING,no_docto_cus:STRING,solicita:STRING,autoriza:STRING,b_entregado:STRING,importe_desglosado:FLOAT,fec_entregado:TIMESTAMP,fec_conf_trans:TIMESTAMP,fec_rech_trans:TIMESTAMP,tipo_cambio:FLOAT,tipo_cancelacion:STRING,fec_exporta_flujo:TIMESTAMP,fec_trans:TIMESTAMP,b_gen_contable:STRING,id_codigo:STRING,id_subcodigo:STRING,fisica_moral:STRING,nac_ext:STRING,id_estatus_cheq:STRING,invoice_id:INTEGER,vendor_id:INTEGER,vendor_site_id:INTEGER,invoice_type:STRING,no_factura:STRING,grupo_pago:INTEGER,id_rubro:FLOAT,agrupa1:INTEGER,agrupa2:INTEGER,agrupa3:INTEGER,po_headers:STRING,alternate_vendor_id_eft:STRING,alternate_vendor_site_id_eft:STRING,invoice_type_lookup_code:STRING,b_autoriza_impre:STRING,firmante1:INTEGER,firmante2:INTEGER,oper_may_esp:STRING,cod_bloqueo:STRING,rfc:STRING,b_gen_conta:STRING,no_poliza:INTEGER,c_poliza:INTEGER,c_lote:INTEGER,c_periodo:INTEGER,c_mes:INTEGER,Division:STRING,Ind_IVA:STRING,contrarecibo:STRING,deudor:STRING,descripcion:STRING,rango:STRING,no_pedido:INTEGER,referencia_ban:STRING,hora_recibo:STRING,fec_concilia_caja:TIMESTAMP,fec_propuesta:TIMESTAMP,importe_parcial:FLOAT,b_arch_seg:STRING,cve_control:STRING,id_banco_ant:INTEGER,id_chequera_ant:STRING,origen_mov_ant:STRING,no_cliente_ant:STRING,id_servicio_be:STRING,e_mail:STRING,clabe:STRING,id_area:INTEGER,monto_sobregiro:FLOAT,fec_propone_mov:TIMESTAMP,usu_propone_mov:INTEGER,id_grupo:INTEGER,tabla_origen:STRING,fecha_contabilizacion:TIMESTAMP,b_certificado:STRING,fec_certificacion:TIMESTAMP,abba:STRING,swift:STRING,nombre_prov_divisas:STRING,banco_divisas:STRING,direccion_divisas:STRING,cuenta_divisas:STRING,sort_code:STRING,abi:STRING,cab:STRING,comentario1:STRING,comentario2:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.hist_solicitud gs://bbp_carga_txt/CsvFilesSet/hist_solicitud.csv.gz no_empresa:INTEGER,no_folio_det:INTEGER,no_folio_mov:INTEGER,id_tipo_operacion:INTEGER,id_cve_operacion:INTEGER,id_tipo_saldo:INTEGER,no_linea:INTEGER,id_inv_cbolsa:INTEGER,no_cuenta:INTEGER,id_estatus_mov:STRING,no_cheque:INTEGER,id_chequera:STRING,id_banco:INTEGER,id_forma_pago:INTEGER,importe:FLOAT,importe_original:FLOAT,b_salvo_buen_cobro:STRING,id_tipo_docto:INTEGER,no_docto:STRING,valor_tasa:FLOAT,fec_operacion:TIMESTAMP,fec_valor:TIMESTAMP,fec_valor_original:TIMESTAMP,fec_recalculo:TIMESTAMP,folio_ref:INTEGER,dias_inv:INTEGER,id_tipo_movto:STRING,id_caja:INTEGER,id_divisa:STRING,id_divisa_original:STRING,fec_exportacion:TIMESTAMP,fec_reimprime:TIMESTAMP,fec_imprime:TIMESTAMP,fec_cheque:TIMESTAMP,lote_entrada:INTEGER,lote_salida:INTEGER,referencia:STRING,folio_banco:STRING,beneficiario:STRING,id_leyenda:STRING,id_banco_benef:INTEGER,id_chequera_benef:STRING,concepto:STRING,id_contable:STRING,folio_seg:INTEGER,arch_protegido:STRING,usuario_imprime:INTEGER,fec_alta:TIMESTAMP,usuario_alta:INTEGER,fec_modif:TIMESTAMP,usuario_modif:INTEGER,no_cuenta_ref:INTEGER,id_estatus_cb:STRING,id_estatus_cc:STRING,no_cliente:STRING,no_cobrador:INTEGER,sucursal:INTEGER,plaza:INTEGER,observacion:STRING,no_recibo:INTEGER,origen_mov:STRING,no_docto_cus:STRING,solicita:STRING,autoriza:STRING,b_entregado:STRING,importe_desglosado:FLOAT,fec_entregado:TIMESTAMP,fec_conf_trans:TIMESTAMP,fec_rech_trans:TIMESTAMP,tipo_cambio:FLOAT,tipo_cancelacion:STRING,fec_exporta_flujo:TIMESTAMP,fec_trans:TIMESTAMP,b_gen_contable:STRING,id_codigo:STRING,id_subcodigo:STRING,fisica_moral:STRING,nac_ext:STRING,id_estatus_cheq:STRING,invoice_id:INTEGER,vendor_id:INTEGER,vendor_site_id:INTEGER,invoice_type:STRING,no_factura:STRING,grupo_pago:INTEGER,id_rubro:FLOAT,agrupa1:INTEGER,agrupa2:INTEGER,agrupa3:INTEGER,po_headers:STRING,alternate_vendor_id_eft:STRING,alternate_vendor_site_id_eft:STRING,invoice_type_lookup_code:STRING,b_autoriza_impre:STRING,firmante1:INTEGER,firmante2:INTEGER,oper_may_esp:STRING,cod_bloqueo:STRING,rfc:STRING,b_gen_conta:STRING,no_poliza:INTEGER,c_poliza:INTEGER,c_lote:INTEGER,c_periodo:INTEGER,c_mes:INTEGER,Division:STRING,Ind_IVA:STRING,contrarecibo:STRING,deudor:STRING,descripcion:STRING,rango:STRING,no_pedido:INTEGER,referencia_ban:STRING,hora_recibo:STRING,fec_concilia_caja:TIMESTAMP,fec_propuesta:TIMESTAMP,importe_parcial:FLOAT,b_arch_seg:STRING,cve_control:STRING,id_banco_ant:INTEGER,id_chequera_ant:STRING,origen_mov_ant:STRING,no_cliente_ant:STRING,id_servicio_be:STRING,e_mail:STRING,clabe:STRING,id_area:INTEGER,monto_sobregiro:FLOAT,fec_propone_mov:TIMESTAMP,usu_propone_mov:INTEGER,id_grupo:INTEGER,tabla_origen:STRING,fecha_contabilizacion:TIMESTAMP,b_certificado:STRING,fec_certificacion:TIMESTAMP,abba:STRING,swift:STRING,nombre_prov_divisas:STRING,banco_divisas:STRING,direccion_divisas:STRING,cuenta_divisas:STRING,sort_code:STRING,abi:STRING,cab:STRING,comentario1:STRING,comentario2:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.movimiento gs://bbp_carga_txt/CsvFilesSet/movimiento.csv.gz no_empresa:INTEGER,no_folio_det:INTEGER,no_folio_mov:INTEGER,id_tipo_operacion:INTEGER,id_cve_operacion:INTEGER,id_tipo_saldo:INTEGER,no_linea:INTEGER,id_inv_cbolsa:INTEGER,no_cuenta:INTEGER,id_estatus_mov:STRING,no_cheque:INTEGER,id_chequera:STRING,id_banco:INTEGER,id_forma_pago:INTEGER,importe:FLOAT,importe_original:FLOAT,b_salvo_buen_cobro:STRING,id_tipo_docto:INTEGER,no_docto:STRING,valor_tasa:FLOAT,fec_operacion:TIMESTAMP,fec_valor:TIMESTAMP,fec_valor_original:TIMESTAMP,fec_recalculo:TIMESTAMP,folio_ref:INTEGER,dias_inv:INTEGER,id_tipo_movto:STRING,id_caja:INTEGER,id_divisa:STRING,id_divisa_original:STRING,fec_exportacion:TIMESTAMP,fec_reimprime:TIMESTAMP,fec_imprime:TIMESTAMP,fec_cheque:TIMESTAMP,lote_entrada:INTEGER,lote_salida:INTEGER,referencia:STRING,folio_banco:STRING,beneficiario:STRING,id_leyenda:STRING,id_banco_benef:INTEGER,id_chequera_benef:STRING,concepto:STRING,id_contable:STRING,folio_seg:INTEGER,arch_protegido:STRING,usuario_imprime:INTEGER,fec_alta:TIMESTAMP,usuario_alta:INTEGER,fec_modif:TIMESTAMP,usuario_modif:INTEGER,no_cuenta_ref:INTEGER,id_estatus_cb:STRING,id_estatus_cc:STRING,no_cliente:STRING,no_cobrador:INTEGER,sucursal:INTEGER,plaza:INTEGER,observacion:STRING,no_recibo:INTEGER,origen_mov:STRING,no_docto_cus:STRING,solicita:STRING,autoriza:STRING,b_entregado:STRING,importe_desglosado:FLOAT,fec_entregado:TIMESTAMP,fec_conf_trans:TIMESTAMP,fec_rech_trans:TIMESTAMP,tipo_cambio:FLOAT,tipo_cancelacion:STRING,fec_exporta_flujo:TIMESTAMP,fec_trans:TIMESTAMP,b_gen_contable:STRING,id_codigo:STRING,id_subcodigo:STRING,fisica_moral:STRING,nac_ext:STRING,id_estatus_cheq:STRING,invoice_id:INTEGER,vendor_id:INTEGER,vendor_site_id:INTEGER,invoice_type:STRING,no_factura:STRING,grupo_pago:INTEGER,id_rubro:FLOAT,agrupa1:INTEGER,agrupa2:INTEGER,agrupa3:INTEGER,po_headers:STRING,alternate_vendor_id_eft:STRING,alternate_vendor_site_id_eft:STRING,invoice_type_lookup_code:STRING,b_autoriza_impre:STRING,firmante1:INTEGER,firmante2:INTEGER,oper_may_esp:STRING,cod_bloqueo:STRING,rfc:STRING,b_gen_conta:STRING,no_poliza:INTEGER,c_poliza:INTEGER,c_lote:INTEGER,c_periodo:INTEGER,c_mes:INTEGER,Division:STRING,Ind_IVA:STRING,contrarecibo:STRING,deudor:STRING,descripcion:STRING,rango:STRING,no_pedido:INTEGER,referencia_ban:STRING,hora_recibo:STRING,fec_concilia_caja:TIMESTAMP,fec_propuesta:TIMESTAMP,importe_parcial:FLOAT,b_arch_seg:STRING,cve_control:STRING,id_banco_ant:INTEGER,id_chequera_ant:STRING,origen_mov_ant:STRING,no_cliente_ant:STRING,id_servicio_be:STRING,e_mail:STRING,clabe:STRING,id_area:INTEGER,monto_sobregiro:FLOAT,fec_propone_mov:TIMESTAMP,usu_propone_mov:INTEGER,id_grupo:INTEGER,tabla_origen:STRING,fecha_contabilizacion:TIMESTAMP,b_certificado:STRING,fec_certificacion:TIMESTAMP,abba:STRING,swift:STRING,nombre_prov_divisas:STRING,banco_divisas:STRING,direccion_divisas:STRING,cuenta_divisas:STRING,sort_code:STRING,abi:STRING,cab:STRING,comentario1:STRING,comentario2:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.persona gs://bbp_carga_txt/CsvFilesSet/persona.csv.gz no_empresa:INTEGER,no_persona:INTEGER,id_tipo_persona:STRING,dia_limite_pago:INTEGER,dia_recep_fact:INTEGER,id_act_generica:INTEGER,id_act_economica:INTEGER,id_giro:INTEGER,id_riesgo_empresa:INTEGER,num_empleados:INTEGER,usuario_alta:INTEGER,usuario_modif:INTEGER,no_acciones_a:INTEGER,no_acciones_b:INTEGER,no_acciones_c:INTEGER,fec_ing:TIMESTAMP,fecha_contacto:TIMESTAMP,fec_alta:TIMESTAMP,fec_modif:TIMESTAMP,ventas_anuales:FLOAT,rfc:STRING,razon_social:STRING,paterno:STRING,materno:STRING,nombre:STRING,nombre_corto:STRING,contacto_principal:STRING,envio_mensajeria:STRING,objeto_social:STRING,puesto:STRING,id_estatus_per:STRING,id_tamano:STRING,id_calidad_empresa:STRING,id_tipo_inmueble:STRING,pers_juridica:STRING,id_edo_civil:STRING,sexo:STRING,b_proveedor:STRING,b_asociacion:STRING,b_contrato_inversion:STRING,id_rubro:FLOAT,equivale_persona:STRING,referencia_cte:STRING,origen_persona:STRING,prov_largo:STRING,nombre_largo:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.seleccion_automatica_grupo gs://bbp_carga_txt/CsvFilesSet/seleccion_automatica_grupo.csv.gz id_grupo:INTEGER,id_grupo_flujo:INTEGER,cve_control:STRING,fecha_propuesta:TIMESTAMP,monto_maximo:FLOAT,cupo_manual:FLOAT,cupo_automatico:FLOAT,cupo_total:FLOAT,fec_limite_selecc:TIMESTAMP,concepto:STRING,usuario_uno:INTEGER,usuario_dos:INTEGER,usuario_tres:INTEGER,id_division:STRING,motivo_rechazo:STRING,habilitado:STRING,fecha_pago:TIMESTAMP,fecha_aut_2:TIMESTAMP,usuario_rev_final:STRING,monto_cancelado:FLOAT
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.SET006 gs://bbp_carga_txt/CsvFilesSet/SET006.csv.gz SETEMP:INTEGER,SISCOD:STRING,SOIEMP:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.usuario_empresa gs://bbp_carga_txt/CsvFilesSet/usuario_empresa.csv.gz no_usuario:INTEGER,no_empresa:INTEGER
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.zexp_fact gs://bbp_carga_txt/CsvFilesSet/zexp_fact.csv.gz no_empresa:STRING,no_doc_sap:STRING,secuencia:STRING,no_pedido:INTEGER,no_folio_set:INTEGER,no_factura:STRING,fec_valor:STRING,fec_factura:STRING,origen:STRING,no_persona:STRING,imp_pago:FLOAT,id_divisa:STRING,id_divisa_original:STRING,tipo_camb:FLOAT,forma_pago:INTEGER,id_banco:INTEGER,id_cheque:STRING,referencia:STRING,concepto:STRING,mandante:STRING,ind_may_es:STRING,division:STRING,ind_iva:STRING,fecha_imp:STRING,fecha_exp:STRING,estatus:STRING,causa_rech:STRING,fechap:STRING,cheque_trn:STRING,imp_usa:FLOAT,tipo_operacion:INTEGER,tipo_movto:STRING,capital:FLOAT,interes:FLOAT,isr:FLOAT,chequera_inv:STRING,casa_bolsa:INTEGER,imp_de_iva:FLOAT,imp_mes_ant:FLOAT,imp_mes_nvo:FLOAT,benef_nafin:STRING,no_cheque:INTEGER,cve_control:STRING,hora_recibo:STRING,id_usuario_seg:STRING,terminalusr:STRING,rubro_erp:STRING,folio_as400:FLOAT,id_banco_benef:INTEGER,importe_original:FLOAT,intermediario_nafin:STRING,fec_notificacion:TIMESTAMP,codigo_notificacion:STRING,fec_emision:TIMESTAMP,fec_vencimiento:TIMESTAMP,estatus_factura:STRING,Secuencia_Banca:INTEGER,Fec_envio_Secuencia:TIMESTAMP,casa_cambio:STRING,no_poliza_compensa:STRING
+bq load -F "^|" --quote ""  hdzprevencionfraudes:sethdzqa.zimp_fact gs://bbp_carga_txt/CsvFilesSet/zimp_fact.csv.gz no_empresa:STRING,no_doc_sap:STRING,secuencia:STRING,fec_fact:STRING,no_factura:STRING,fec_valor:STRING,no_benef:STRING,importe:FLOAT,imp_solic:FLOAT,id_divisa:STRING,concepto:STRING,forma_pago:INTEGER,cve_leyen:INTEGER,benef_alt:STRING,id_bco_alt:FLOAT,id_chq_alt:STRING,id_rubro:FLOAT,gpo_tesor:FLOAT,cod_bloq:STRING,mandante:STRING,ind_may_es:STRING,division:STRING,ind_iva:STRING,centro_cto:FLOAT,rfc:STRING,tipo_camb:FLOAT,id_caja:INTEGER,contra_rec:STRING,fecha_imp:STRING,fecha_exp:STRING,estatus:STRING,causa_rech:STRING,origen:STRING,estatus_compensa:STRING,estatus_proceso:STRING,email_alt:STRING,clabe:STRING,desc_propuesta:STRING,banco_pagador:INTEGER,chequera_pagadora:STRING,fec_propuesta:STRING,id_area:INTEGER,no_prov_as400:STRING,forma_pago_original:INTEGER,no_fact_rel:STRING,tipo_orden:STRING,val_tipo_orden:INTEGER,usuario_revisa:STRING,fec_venc_docto:STRING,tipo_docto_as400:STRING,tipo_agrupacion:STRING
+
+
+bq query --use_legacy_sql=False "update sethdzqa.zimp_fact a  set a.no_doc_sap= trim(a.no_doc_sap) where 1=1"
+bq query --use_legacy_sql=False "update sethdzqa.zexp_fact a  set a.no_doc_sap= trim(a.no_doc_sap) where 1=1"
+bq query --use_legacy_sql=False "update sethdzqa.det_arch_transfer a  set a.nom_arch= trim(a.nom_arch) where 1=1"
+bq query --use_legacy_sql=False "update sethdzqa.hist_movimiento a  set a.no_docto= trim(a.no_docto) where 1=1"
+bq query --use_legacy_sql=False "update sethdzqa.hist_solicitud a  set a.no_docto= trim(a.no_docto) where 1=1"
+bq query --use_legacy_sql=False "update sethdzqa.movimiento a  set a.no_docto= trim(a.no_docto) where 1=1"
+
+
+
+
+
+
+
+
+
+
+
