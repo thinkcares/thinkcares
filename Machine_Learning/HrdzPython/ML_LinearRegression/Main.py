@@ -29,6 +29,7 @@ print(Y_train.shape)
 print(Y_test.shape)
 
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 lm = LinearRegression()
 lm.fit(X_train, Y_train)
@@ -40,6 +41,7 @@ plt.xlabel("Prices: $Y_i$")
 plt.ylabel("Predicted prices: $\hat{Y}_i$")
 plt.title("Prices vs Predicted prices: $Y_i$ vs $\hat{Y}_i$")
 plt.show()
-
 mse = sklearn.metrics.mean_squared_error(Y_test, Y_pred)
-print(mse)
+print ("Coeficientes: \n",lm.coef_)
+print("Error cuadrátrico medio:",mse)
+print("Coeficiente de correlación:", r2_score(Y_test,Y_pred))
