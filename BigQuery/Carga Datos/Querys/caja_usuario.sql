@@ -1,0 +1,1 @@
+ SET NOCOUNT ON   SELECT  [no_usuario],[id_caja] FROM [sethdzqa].[dbo].[caja_usuario] WITH (NOLOCK)

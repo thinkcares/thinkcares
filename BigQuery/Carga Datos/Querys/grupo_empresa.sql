@@ -1,0 +1,1 @@
+SET NOCOUNT ON   SELECT  [no_empresa],[id_grupo_flujo] FROM [sethdzqa].[dbo].[grupo_empresa] WITH (NOLOCK)
