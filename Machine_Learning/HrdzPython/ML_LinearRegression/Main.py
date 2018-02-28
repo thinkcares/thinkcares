@@ -56,15 +56,24 @@ print("Coeficiente de correlación R2:", r2_score(Y_test,Y_pred))
 #clf.fit(X_train, Y_train)
 #print ("SGDR R2:",clf.score(X_train, Y_train))
 
-#Support Vector Machine (SPV)
+#Support Vector Machine (SPV) lineal
 from sklearn import svm
 clf_svr = svm.SVR(kernel='linear')
 clf_svr.fit(X_train, Y_train)
 print ("SVR R2:",clf_svr.score(X_train, Y_train))
 
-clf_svr_poly = svm.SVR(kernel='poly')
-clf_svr_poly.fit(X_train, Y_train)
-print ("SVR POLY R2:",clf_svr_poly.score(X_train, Y_train))
+#clf_svr_poly = svm.SVR(kernel='poly')
+#clf_svr_poly.fit(X_train, Y_train)
+#print ("SVR POLY R2:",clf_svr_poly.score(X_train, Y_train))
+
+#Support Vector Machine (SPV) RBF (Radial Basis Function)
+clf_svr_rbf = svm.SVR(kernel='rbf')
+clf_svr_rbf.fit(X_train, Y_train)
+print ("RBF R2:",clf_svr_rbf.score(X_train, Y_train))
+
+
+
+
 
 
 
