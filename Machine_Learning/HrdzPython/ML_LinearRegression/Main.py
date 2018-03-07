@@ -37,6 +37,8 @@ lm.fit(X_train, Y_train)
 #pd=lm.predict([[0.38214,   0.0,   6.20,   0.0,  0.5040,  8.040,   86.5,   3.2157,   8.0,  307.0, 17.4,  387.38,   3.13]])
 #print (pd)
 #print(X_test)
+
+
 Y_pred = lm.predict(X_test)
 print("Predicción: \n",Y_pred)
 plt.scatter(Y_test, Y_pred)
@@ -45,8 +47,6 @@ plt.ylabel("Predicted prices: $\hat{Y}_i$")
 plt.title("Prices vs Predicted prices: $Y_i$ vs $\hat{Y}_i$")
 plt.show()
 mse = sklearn.metrics.mean_squared_error(Y_test, Y_pred)
-
-
 print ("Coeficientes: \n",lm.coef_)
 print("Error cuadrátrico medio:",mse)
 print("Coeficiente de correlación R2:", r2_score(Y_test,Y_pred))
