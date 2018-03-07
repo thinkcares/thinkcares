@@ -1,0 +1,1 @@
+SET NOCOUNT ON   SELECT  [id_grupo_cupo],REPLACE(REPLACE(REPLACE(REPLACE([desc_grupo_cupo],'|',''),'"',''),CHAR(13),''),CHAR(10),'') as desc_grupo_cupo FROM [sethdzqa].[dbo].[cat_grupo_cupo] WITH (NOLOCK)

@@ -1,0 +1,2 @@
+SET NOCOUNT ON SELECT [id_caja],REPLACE(REPLACE(REPLACE(REPLACE([desc_caja],'|',''),'"',''),CHAR(13),''),CHAR(10),'') as desc_caja,REPLACE(REPLACE(REPLACE(REPLACE([ubicacion],'|',''),'"',''),CHAR(13),''),CHAR(10),'') as ubicacion,REPLACE(REPLACE(REPLACE(REPLACE([b_activa],'|',''),'"',''),CHAR(13),''),CHAR(10),'') as b_activa,[equivale_banco],[fondo_fijo_mn],[fondo_fijo_dls],REPLACE(REPLACE(REPLACE(REPLACE([b_abrir_caja],'|',''),'"',''),CHAR(13),''),CHAR(10),'') as b_abrir_caja
+	  FROM [sethdzqa].[dbo].[cat_caja] WITH (NOLOCK)
