@@ -35,7 +35,11 @@ query = """
   
      
   """
-x = pd.read_gbq(query=query,project_id="mx-herdez-analytics",private_key='mx-herdez-analytics-cf83fcf5fcc3.json')
+# x = pd.read_gbq(query=query,project_id="mx-herdez-analytics",private_key='mx-herdez-analytics-cf83fcf5fcc3.json')
+# x.to_csv("DatosHdz.csv")
+
+x = pd.read_csv("DatosHdz.csv")
+
 print("Tamaño del arreglo:",x.shape)
 print(x)
 print ("Importe máximo:",np.max(x.MfImportePropuesta))
