@@ -71,12 +71,67 @@ clf_svr_rbf = svm.SVR(kernel='rbf')
 clf_svr_rbf.fit(X_train, Y_train)
 print ("RBF R2:",clf_svr_rbf.score(X_train, Y_train))
 
+from sklearn import ensemble
+clf_et=ensemble.ExtraTreesRegressor(n_estimators=10, random_state=42)
+
+from sklearn.cross_validation import *
+def train_and_evaluate(clf, X_train, Y_train):
+    clf.fit(X_train, Y_train)
+
+    print("Coefficient of determination on training set:", clf.score(X_train, Y_train))
+
+    # create a k-fold croos validation iterator of k=5 folds
+    cv = KFold(X_train.shape[0], 5, shuffle=True, random_state=33)
+    scores = cross_val_score(clf, X_train, Y_train, cv=cv)
+    print("Average coefficient of determination using 5-fold crossvalidation:", np.mean(scores))
+
+train_and_evaluate(clf_et,X_train,Y_train)
+
+importances = clf_et.feature_importances_
+std = np.std([tree.feature_importances_ for tree in clf_et.estimators_],
+             axis=0)
+indices = np.argsort(importances)[::-1]
+
+# Print the feature ranking
+print("Feature ranking:")
+
+for f in range(X_train.shape[1]):
+    print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
+
+# Plot the feature importances of the forest
+plt.figure()
+plt.title("Feature importances")
+plt.bar(range(X_train.shape[1]), importances[indices],
+        color="r", yerr=std[indices], align="center")
+plt.xticks(range(X_train.shape[1]), indices)
+plt.xlim([-1, X_train.shape[1]])
+plt.show()
+
+print (list(zip(clf_et.feature_importances_,boston.feature_names)))
+
+from sklearn import metrics
 
 
+def measure_performance(X, y, clf, show_accuracy=True, show_classification_report=True, show_confusion_matrix=True,
+                        show_r2_score=False):
+    y_pred = clf.predict(X)
+    if show_accuracy:
+        print("Accuracy:{0:.3f}".format(metrics.accuracy_score(y, y_pred)), "\n")
+
+    if show_classification_report:
+        print("Classification report")
+        print(metrics.classification_report(y, y_pred), "\n")
+
+    if show_confusion_matrix:
+        print("Confusion matrix")
+        print(metrics.confusion_matrix(y, y_pred), "\n")
+
+    if show_r2_score:
+        print("Coefficient of determination:{0:.3f}".format(metrics.r2_score(y, y_pred)), "\n")
 
 
-
-
+measure_performance(X_test, Y_test, clf_et, show_accuracy=False, show_classification_report=False,
+                    show_confusion_matrix=False, show_r2_score=True)
 
 
 

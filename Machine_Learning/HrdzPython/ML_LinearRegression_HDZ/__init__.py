@@ -74,3 +74,13 @@ mse = sklearn.metrics.mean_squared_error(Y_test, Y_pred)
 print ("Coeficientes: \n",lm.coef_)
 print("Error cuadrátrico medio:",mse)
 print("Coeficiente de correlación R2:", r2_score(Y_test,Y_pred))
+
+from sklearn import svm
+clf_svr = svm.SVR(kernel='linear')
+clf_svr.fit(X_train, Y_train)
+print ("SVR R2:",clf_svr.score(X_train, Y_train))
+
+clf_svr_rbf = svm.SVR(kernel='rbf')
+clf_svr_rbf.fit(X_train, Y_train)
+print ("RBF R2:",clf_svr_rbf.score(X_train, Y_train))
+
