@@ -26,6 +26,8 @@ namespace BigQuery
         public static string sProjectID;
         public static string sDatasetId;
         public static string sBucketPathToLoadCsvSET;
+        public static TextWriterTraceListener twl = new TextWriterTraceListener(@"C:\tmp\log.txt");
+
 
         public Form1()
         {
@@ -38,16 +40,21 @@ namespace BigQuery
             DateTime horaInicio = DateTime.Now;
             txtHoraInicio.Text = horaInicio.ToString();
             InicializaVariables();
+            Debug.Listeners.Add(twl);
+            Trace.WriteLine(">>>> Inicia gCloud ");
+            twl.Flush();
+
             BuscaArchivosGS(sProjectID, credential); // Busca Files en el bucket destino y borra todos los files en éste
             BigQueryClean(sProjectID, sDatasetId,credential); // Borra tablas en BigQuery
-            // ExtractSql2Csv(); // Extrae datos de MSSQL a archivos Csv
-            // LimpiaSed(@"C:\tmp"); // Limpia, comprime csvs en 7zip
-            // Upload2GS(); // sube archivos a Google Storage
-            // LoadBq(); // Inserta archivos en tablas de BigQuery
-            // BigQueryUpdate(sProjectID, sDatasetId, credential);
+            //ExtractSql2Csv(); // Extrae datos de MSSQL a archivos Csv
+            LimpiaSed(@"C:\tmp"); // Limpia, comprime csvs en 7zip
+            Upload2GS(); // sube archivos a Google Storage
+            LoadBq(); // Inserta archivos en tablas de BigQuery
+            BigQueryUpdate(sProjectID, sDatasetId, credential);
             DateTime horaFin = DateTime.Now;
             txtHoraFin.Text = horaFin.ToString();
             MessageBox.Show("Proceso Finalizado Totalmente");
+
 
         }
         public static void LoadBq()
@@ -61,14 +68,15 @@ namespace BigQuery
         public static void Upload2GS()
         {  foreach (var file in lstCmdsCopyGS)
             {
-                EjecutarCmd("cd /tmp && " + file.Replace("'", "\""));
+                EjecutarCmd(file.Replace("'", "\""));
             }
          }
         public static void ExtractSql2Csv()
         {
             foreach (var sql in lstCmdsSqlExtract)
             {
-                EjecutarCmd("cd /tmp && " + sql.Replace("'", "\""));
+                
+               EjecutarCmd(sql.Replace("'", "\""));
             }
 
         }
@@ -130,6 +138,10 @@ namespace BigQuery
                 cmd.StandardInput.Flush();
                 cmd.StandardInput.Close();
                 cmd.WaitForExit();
+                Debug.Listeners.Add(twl);
+                Trace.WriteLine(comando);
+                twl.Flush();
+
                 // MessageBox.Show(cmd.StandardOutput.ReadToEnd());
             }
             catch (Exception ex)
@@ -153,6 +165,7 @@ namespace BigQuery
                     if (n == "TABLE")
                     {
                         lstTblsFinal.Add(table.Reference.TableId);
+                       
                     }
                 }
                 MessageBox.Show("Tablas encontradas en :" + lstTblsFinal.Count.ToString());
@@ -161,6 +174,9 @@ namespace BigQuery
                     foreach (var tbl in lstTblsFinal)
                     {
                         bqClient.DeleteTable(sDatasetId, tbl);
+                        Debug.Listeners.Add(twl);
+                        Trace.WriteLine("Se borró la siguiente tabla en Bq: {0}", tbl);
+                        twl.Flush();
                     }
                 }
 
@@ -178,20 +194,26 @@ namespace BigQuery
             try
             {
                 string[] files = System.IO.Directory.GetFiles(path, "*.csv");
-
-               
                 foreach (var file in files)
                 {
-                    string patron = @"sed -i'.bck' 's/\NULL//g' ";
-                    patron = patron.Replace("'","\"") + file;
+                    string patron = @" cd /tmp && sed -i'.bck' 's/\NULL//g' ";
+                    patron = patron.Replace("'","\"") + file.Replace(@"C:\tmp\","");
                     EjecutarCmd(patron);
                     Console.WriteLine(patron);
                     if (File.Exists(file+".bck"))
                     {
                         File.Delete(file+".bck");
-                        File.Delete("sed*.*");
+                        
                     }
                     Comprime(file);
+
+                    var dir = new DirectoryInfo(@"C:\tmp");
+                    foreach (var item in dir.EnumerateFiles("sed*.*"))
+                    {
+                        item.Delete();
+                    }
+                   
+
                 }
             }
             catch (Exception ex)
@@ -203,7 +225,7 @@ namespace BigQuery
         }
         public static void Comprime(string file){
             FileInfo fi = new FileInfo(file);
-            string comando7zip = String.Format("7z a -tgzip {0}.gz {0} -MX3",fi.Name);
+            string comando7zip = String.Format("cd /tmp && 7z a -tgzip {0}.gz {0} -MX3",fi.Name);
             Console.WriteLine(comando7zip);
             EjecutarCmd(comando7zip);
 
@@ -220,13 +242,17 @@ namespace BigQuery
             List<string> lstFiles = new List<string>();
             foreach (var bucket in storage.ListObjects(@"hrdz_input", "").Where( o => o.Name.Contains("CsvFilesSet")))
             {
-                Console.WriteLine(bucket.Name);
+                Console.WriteLine(bucket.Name);               
                 lstFiles.Add(bucket.Name);
             }
 
             if (lstFiles.Count > 0)
             {
                 DeleteObjectGStorage("hrdz_input", lstFiles, credential);
+                Debug.Listeners.Add(twl);
+                Trace.WriteLine("Se eliminaron los siguientes archivos en GS: {0}", lstFiles.ToString());
+                twl.Flush();
+
                 Console.WriteLine("Se eliminaron {0} archivos", lstFiles.Count);
             }
             else
@@ -286,5 +312,6 @@ namespace BigQuery
 
         }
 
+        
     }
 }

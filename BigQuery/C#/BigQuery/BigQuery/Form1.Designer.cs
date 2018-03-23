@@ -31,6 +31,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtHoraInicio = new System.Windows.Forms.TextBox();
             this.txtHoraFin = new System.Windows.Forms.TextBox();
+            this.listCmdView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button1
@@ -45,23 +47,40 @@
             // 
             // txtHoraInicio
             // 
-            this.txtHoraInicio.Location = new System.Drawing.Point(293, 67);
+            this.txtHoraInicio.Location = new System.Drawing.Point(38, 78);
             this.txtHoraInicio.Name = "txtHoraInicio";
             this.txtHoraInicio.Size = new System.Drawing.Size(207, 20);
             this.txtHoraInicio.TabIndex = 1;
             // 
             // txtHoraFin
             // 
-            this.txtHoraFin.Location = new System.Drawing.Point(297, 215);
+            this.txtHoraFin.Location = new System.Drawing.Point(275, 78);
             this.txtHoraFin.Name = "txtHoraFin";
             this.txtHoraFin.Size = new System.Drawing.Size(207, 20);
             this.txtHoraFin.TabIndex = 2;
+            // 
+            // listCmdView
+            // 
+            this.listCmdView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listCmdView.Location = new System.Drawing.Point(1, 140);
+            this.listCmdView.Name = "listCmdView";
+            this.listCmdView.Size = new System.Drawing.Size(787, 171);
+            this.listCmdView.TabIndex = 3;
+            this.listCmdView.UseCompatibleStateImageBehavior = false;
+            this.listCmdView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Comando";
+            this.columnHeader1.Width = 785;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listCmdView);
             this.Controls.Add(this.txtHoraFin);
             this.Controls.Add(this.txtHoraInicio);
             this.Controls.Add(this.button1);
@@ -78,6 +97,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtHoraInicio;
         private System.Windows.Forms.TextBox txtHoraFin;
+        private System.Windows.Forms.ListView listCmdView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 
