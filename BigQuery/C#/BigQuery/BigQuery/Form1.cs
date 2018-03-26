@@ -30,8 +30,7 @@ namespace BigQuery
         {
             get
             {
-                return string.Format("Log_{0:yyyyMMdd_hhmmss}.txt",
-                DateTime.Now);
+                return string.Format("Log_{0:yyyyMMdd_HHmmss}.txt",DateTime.Now);
             }
         }
         public static TextWriterTraceListener twl = new TextWriterTraceListener(@"C:\tmp\"+ LogFileName);
@@ -49,10 +48,11 @@ namespace BigQuery
             txtHoraInicio.Text = horaInicio.ToString();
             InicializaVariables();
             Debug.Listeners.Add(twl);
+            Trace.WriteLine(DateTime.Now.ToLongTimeString());
             Trace.WriteLine(">>>> Inicia gCloud ");
             LimpiaTmpLocal();
             BuscaArchivosGS(sProjectID, credential); // Busca Files en el bucket destino y borra todos los files en éste
-            BigQueryClean(sProjectID, sDatasetId,credential); // Borra tablas en BigQuery
+            BigQueryClean(sProjectID, sDatasetId, credential); // Borra tablas en BigQuery
             ExtractSql2Csv(); // Extrae datos de MSSQL a archivos Csv
             LimpiaSed(@"C:\tmp"); // Limpia, comprime csvs en 7zip
             Upload2GS(); // sube archivos a Google Storage
@@ -60,8 +60,10 @@ namespace BigQuery
             BigQueryUpdate(sProjectID, sDatasetId, credential);
             DateTime horaFin = DateTime.Now;
             txtHoraFin.Text = horaFin.ToString();
+            Trace.WriteLine(DateTime.Now.ToLongTimeString());
+            Trace.WriteLine("Proceso Finalizado");
             MessageBox.Show("Proceso Finalizado Totalmente");
-
+            Trace.Flush();
 
         }
         public static void LoadBq()
@@ -174,7 +176,7 @@ namespace BigQuery
                        
                     }
                 }
-                MessageBox.Show("Tablas encontradas en :" + lstTblsFinal.Count.ToString());
+               // MessageBox.Show("Tablas encontradas en :" + lstTblsFinal.Count.ToString());
                 if (lstTblsFinal.Count() > 0)
                 {
                     foreach (var tbl in lstTblsFinal)
@@ -199,18 +201,20 @@ namespace BigQuery
         }
         public static void LimpiaTmpLocal()
         {
+            List<string> lstFiles2Delete = new List<string>(new string[] { "*.gz", "sed*.*", "*.csv" });
             var dir = new DirectoryInfo(@"C:\tmp");
 
-            if (dir.EnumerateFiles("*.gz").Count()>0)
+            foreach (var extensionItem in lstFiles2Delete)
             {
-                 foreach (var item in dir.EnumerateFiles("*.gz"))
-                            {
-                                item.Delete();
-                            }
-            }
 
-
-           
+                if (dir.EnumerateFiles(extensionItem).Count() > 0)
+                {
+                    foreach (var item in dir.EnumerateFiles(extensionItem))
+                    {
+                        item.Delete();
+                    }
+                }
+            }           
         }
 
         public static void LimpiaSed(string path)
@@ -309,21 +313,28 @@ namespace BigQuery
                 bqClient.ExecuteQuery("update sethdzqa.zimp_fact a  set a.no_doc_sap= trim(a.no_doc_sap) where 1=1"
                     ,parameters
                     , new QueryOptions { UseLegacySql = false });
+                Trace.WriteLine("update zimp_fact");
                 bqClient.ExecuteQuery("update sethdzqa.zexp_fact a  set a.no_doc_sap= trim(a.no_doc_sap) where 1=1"
                    , parameters
                    , new QueryOptions { UseLegacySql = false });
+                Trace.WriteLine("update zexp_fact");
                 bqClient.ExecuteQuery("update sethdzqa.det_arch_transfer a  set a.nom_arch= trim(a.nom_arch) where 1=1"
                    , parameters
                    , new QueryOptions { UseLegacySql = false });
+                Trace.WriteLine("update det_arch_transfer");
                 bqClient.ExecuteQuery("update sethdzqa.hist_movimiento a  set a.no_docto= trim(a.no_docto) where 1=1"
                    , parameters
                    , new QueryOptions { UseLegacySql = false });
+                Trace.WriteLine("update hist_movimiento");
                 bqClient.ExecuteQuery("update sethdzqa.hist_solicitud a  set a.no_docto= trim(a.no_docto) where 1=1"
                 , parameters
                 , new QueryOptions { UseLegacySql = false });
+                Trace.WriteLine("update hist_solicitud");
                 bqClient.ExecuteQuery("update sethdzqa.movimiento a  set a.no_docto= trim(a.no_docto) where 1=1"
                 , parameters
                 , new QueryOptions { UseLegacySql = false });
+                Trace.WriteLine("update movimiento");
+                Trace.Flush();
 
 
             }
