@@ -26,6 +26,7 @@ namespace BigQuery
         public static string sProjectID;
         public static string sDatasetId;
         public static string sBucketPathToLoadCsvSET;
+
         public static string LogFileName
         {
             get
@@ -33,7 +34,8 @@ namespace BigQuery
                 return string.Format("Log_{0:yyyyMMdd_HHmmss}.txt",DateTime.Now);
             }
         }
-        public static TextWriterTraceListener twl = new TextWriterTraceListener(@"C:\tmp\"+ LogFileName);
+
+        public static TextWriterTraceListener twl = new TextWriterTraceListener(@"C:\tmp\" + LogFileName);
 
 
         public Form1()
@@ -44,26 +46,109 @@ namespace BigQuery
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             DateTime horaInicio = DateTime.Now;
             txtHoraInicio.Text = horaInicio.ToString();
             InicializaVariables();
             Debug.Listeners.Add(twl);
+
             Trace.WriteLine(DateTime.Now.ToLongTimeString());
             Trace.WriteLine(">>>> Inicia gCloud ");
-            LimpiaTmpLocal();
-            BuscaArchivosGS(sProjectID, credential); // Busca Files en el bucket destino y borra todos los files en éste
-            BigQueryClean(sProjectID, sDatasetId, credential); // Borra tablas en BigQuery
-            ExtractSql2Csv(); // Extrae datos de MSSQL a archivos Csv
-            LimpiaSed(@"C:\tmp"); // Limpia, comprime csvs en 7zip
-            Upload2GS(); // sube archivos a Google Storage
-            LoadBq(); // Inserta archivos en tablas de BigQuery
-            BigQueryUpdate(sProjectID, sDatasetId, credential);
+
+            var lstChechedItems  = checkedListBox1.CheckedIndices;
+            bool bLimpiaLocal = false;//0
+            bool bEliminaEnGS = false;//1
+            bool bEliminaTablasDataset = false;//2
+            bool bExtraeCsv = false;//3
+            bool bComprime = false;//4
+            bool bCargaGS = false;//5
+            bool bCargaBQ = false;//6
+
+            if (lstChechedItems.Count>0)
+            {
+
+                foreach (int item in lstChechedItems)
+                {
+                    if (item == 0)
+                    {
+                        bLimpiaLocal = true;
+                    }
+                    else if (item == 1)
+                    {
+                        bEliminaEnGS = true;
+                    }
+                    else if (item == 2)
+                    {
+                        bEliminaTablasDataset = true;
+                    }
+                    else if (item == 3)
+                    {
+                        bExtraeCsv = true;
+                    }
+                    else if (item == 4)
+                    {
+                        bComprime = true;
+                    }
+                    else if (item == 5)
+                    {
+                        bCargaGS = true;
+                    }
+                    else if (item == 6)
+                    {
+                        bCargaGS = true;
+                    }
+                }
+
+                if (bLimpiaLocal==true)
+                {
+                    LimpiaTmpLocal();
+                }
+                if (bEliminaEnGS==true)
+                {
+                    BuscaArchivosGS(sProjectID, credential); // Busca Files en el bucket destino y borra todos los files en éste
+                }
+
+                if (bEliminaTablasDataset==true)
+                {
+                    BigQueryClean(sProjectID, sDatasetId, credential); // Borra tablas en BigQuery
+                }
+                if (bExtraeCsv==true)
+                {
+                    ExtractSql2Csv(); // Extrae datos de MSSQL a archivos Csv
+                }
+                if (bComprime==true)
+                {
+                    LimpiaSed(@"C:\tmp"); // Limpia, comprime csvs en 7zip
+                }
+                if (bCargaGS==true)
+                {
+                    Upload2GS(); // sube archivos a Google Storage
+                }
+                if (bCargaBQ==true)
+                {
+                    LoadBq(); // Inserta archivos en tablas de BigQuery
+                    BigQueryUpdate(sProjectID, sDatasetId, credential);
+                }
+                
+            }
+            else 
+            {
+                MessageBox.Show("Favor de Seleccionar  alguna opción");
+                this.Close();
+
+            }
+
             DateTime horaFin = DateTime.Now;
             txtHoraFin.Text = horaFin.ToString();
             Trace.WriteLine(DateTime.Now.ToLongTimeString());
             Trace.WriteLine("Proceso Finalizado");
-            MessageBox.Show("Proceso Finalizado Totalmente");
+            MessageBox.Show("Proceso Finalizado Totalmente \n Revisa el log en la carpeta C:\\tmp\\"+LogFileName);
             Trace.Flush();
+            this.Close();
+
+
+
+
 
         }
         public static void LoadBq()
