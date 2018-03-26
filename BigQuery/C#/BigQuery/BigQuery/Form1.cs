@@ -26,7 +26,15 @@ namespace BigQuery
         public static string sProjectID;
         public static string sDatasetId;
         public static string sBucketPathToLoadCsvSET;
-        public static TextWriterTraceListener twl = new TextWriterTraceListener(@"C:\tmp\log.txt");
+        public static string LogFileName
+        {
+            get
+            {
+                return string.Format("Log_{0:yyyyMMdd_hhmmss}.txt",
+                DateTime.Now);
+            }
+        }
+        public static TextWriterTraceListener twl = new TextWriterTraceListener(@"C:\tmp\"+ LogFileName);
 
 
         public Form1()
@@ -42,6 +50,7 @@ namespace BigQuery
             InicializaVariables();
             Debug.Listeners.Add(twl);
             Trace.WriteLine(">>>> Inicia gCloud ");
+            LimpiaTmpLocal();
             BuscaArchivosGS(sProjectID, credential); // Busca Files en el bucket destino y borra todos los files en éste
             BigQueryClean(sProjectID, sDatasetId,credential); // Borra tablas en BigQuery
             ExtractSql2Csv(); // Extrae datos de MSSQL a archivos Csv
@@ -188,6 +197,22 @@ namespace BigQuery
                 MessageBox.Show(ex.Message);
             }
         }
+        public static void LimpiaTmpLocal()
+        {
+            var dir = new DirectoryInfo(@"C:\tmp");
+
+            if (dir.EnumerateFiles("*.gz").Count()>0)
+            {
+                 foreach (var item in dir.EnumerateFiles("*.gz"))
+                            {
+                                item.Delete();
+                            }
+            }
+
+
+           
+        }
+
         public static void LimpiaSed(string path)
         {
             try
@@ -195,7 +220,7 @@ namespace BigQuery
                 string[] files = System.IO.Directory.GetFiles(path, "*.csv");
                 foreach (var file in files)
                 {
-                    string patron = @" cd /tmp && sed -i'.bck' 's/\NULL//g' ";
+                    string patron = @"sed -i'.bck' 's/\NULL//g' ";
                     patron = patron.Replace("'","\"") + file.Replace(@"C:\tmp\","");
                     EjecutarCmd(patron);
                     Console.WriteLine(patron);
@@ -224,7 +249,7 @@ namespace BigQuery
         }
         public static void Comprime(string file){
             FileInfo fi = new FileInfo(file);
-            string comando7zip = String.Format("cd /tmp && 7z a -tgzip {0}.gz {0} -MX3",fi.Name);
+            string comando7zip = String.Format("7z a -tgzip {0}.gz {0} -MX3",fi.Name);
             Console.WriteLine(comando7zip);
             EjecutarCmd(comando7zip);
 
