@@ -46,37 +46,28 @@ where dxestatus in ('PAGADO','REVISAR CANCELADO Y PAGADO')
 --'009558592','5644550025','5646237987','5646385924'
 --) 
   """
-x = pd.read_gbq(query=query,project_id="mx-herdez-analytics",private_key='BigQuery/mx-herdez-analytics-cf83fcf5fcc3.json')
-print(x)
+df = pd.read_gbq(query=query,project_id="mx-herdez-analytics",private_key='BigQuery/mx-herdez-analytics-cf83fcf5fcc3.json')
+
 
 # df = pd.read_csv('Data/4_DecesionTree.csv')
 # df = pd.read_csv('Data/4_DecesionTreeMas2v2.csv')
-df=x
 feature_names = np.array(df.columns.values)
 
 
-titanic_X, titanic_y = [], []
-titanic_X = np.array(df)
-titanic_y = np.array(df["Class"])
+features_X, labels_y = [], []
+features_X = np.array(df)
+labels_y = np.array(df["Class"])
 
 print(feature_names)
-print(titanic_X[0], titanic_y[0])
+print(features_X[0], labels_y[0])
 
-titanic_X = titanic_X[:, [0,1,2,3,4,5]]
+features_X = features_X[:, [0,1,2,3,4,5]]
 # los 2 puntos significa TODOS LOS REGISTROS  Y  SOLO OCUPARÁ las columnas 1 pClass, 4 age, 10 sex
 feature_names = feature_names[[0,1,2,3,4,5]]
 # solo elige  solo dejar los encabezados de las mismas columnas escogidas
-#  tanto en x como en y solo se quedan las columnas  Clase, Edad y Sexo
-
-# print(feature_names)
-# print(titanic_X[12], titanic_y[12])
 
 
-
-# print ('New feature names:',feature_names)
-# print ('Values:',titanic_X[0])
-
-X_train, X_test, y_train, y_test = train_test_split(titanic_X, titanic_y, test_size=0.25, random_state=33)
+X_train, X_test, y_train, y_test = train_test_split(features_X, labels_y, test_size=0.25, random_state=33)
 
 clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=3,min_samples_leaf=5)
 clf = clf.fit(X_train,y_train)
