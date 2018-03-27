@@ -1,16 +1,16 @@
 digraph Tree {
 node [shape=box] ;
-0 [label="PagoEnTiempo <= 0.5\nentropy = 0.464\nsamples = 139217\nvalue = [13711, 125506]"] ;
-1 [label="entropy = 0.0\nsamples = 123518\nvalue = [0, 123518]"] ;
+0 [label="PagoEnTiempo <= 0.5\nentropy = 0.4644\nsamples = 139217\nvalue = [13720, 125497]"] ;
+1 [label="entropy = 0.0\nsamples = 123502\nvalue = [0, 123502]"] ;
 0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
-2 [label="Firmas <= 0.5\nentropy = 0.548\nsamples = 15699\nvalue = [13711, 1988]"] ;
+2 [label="Firmas <= 0.5\nentropy = 0.549\nsamples = 15715\nvalue = [13720, 1995]"] ;
 0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
-3 [label="entropy = 0.0\nsamples = 1963\nvalue = [0, 1963]"] ;
+3 [label="entropy = 0.0\nsamples = 1971\nvalue = [0, 1971]"] ;
 2 -> 3 ;
-4 [label="CambioCliente <= 0.5\nentropy = 0.019\nsamples = 13736\nvalue = [13711, 25]"] ;
+4 [label="CambioCliente <= 0.5\nentropy = 0.0185\nsamples = 13744\nvalue = [13720, 24]"] ;
 2 -> 4 ;
-5 [label="entropy = 0.0\nsamples = 13711\nvalue = [13711, 0]"] ;
+5 [label="entropy = 0.0\nsamples = 13720\nvalue = [13720, 0]"] ;
 4 -> 5 ;
-6 [label="entropy = 0.0\nsamples = 25\nvalue = [0, 25]"] ;
+6 [label="entropy = 0.0\nsamples = 24\nvalue = [0, 24]"] ;
 4 -> 6 ;
 }

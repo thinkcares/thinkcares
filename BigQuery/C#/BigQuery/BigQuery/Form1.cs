@@ -431,7 +431,10 @@ namespace BigQuery
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, true);
+            }
         }
 
         
