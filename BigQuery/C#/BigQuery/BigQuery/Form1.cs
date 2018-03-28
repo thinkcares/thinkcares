@@ -95,7 +95,7 @@ namespace BigQuery
                     }
                     else if (item == 6)
                     {
-                        bCargaGS = true;
+                        bCargaBQ = true;
                     }
                 }
 
