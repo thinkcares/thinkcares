@@ -16,6 +16,8 @@ from google.cloud.bigquery import job
 query = """  
 
 SELECT
+KxNoDocto,
+ROW_NUMBER() OVER() row_number,
 case when  MfTotalFirmas=3 then 1 else 0 end as Firmas
 , case
      when KxEstatusPropuesta ='A' then  1
@@ -41,18 +43,15 @@ case when  MfTotalFirmas=3 then 1 else 0 end as Firmas
 end AS Class
 FROM stg.tbl_result
 where dxestatus in ('PAGADO','REVISAR CANCELADO Y PAGADO')
---AND KXNODOCTO IN ('5645003204','009561320','009649835','009649836','009649837','009649838','009649839','009649840','009649841','009645355','009645810'
---, '009566822','5646237987', '5646385924',
---'009558592','5644550025','5646237987','5646385924'
---) 
+order by row_number
   """
 df = pd.read_gbq(query=query,project_id="mx-herdez-analytics",private_key='BigQuery/mx-herdez-analytics-cf83fcf5fcc3.json')
-
+print(df)
 
 # df = pd.read_csv('Data/4_DecesionTree.csv')
 # df = pd.read_csv('Data/4_DecesionTreeMas2v2.csv')
 feature_names = np.array(df.columns.values)
-
+print(feature_names)
 
 features_X, labels_y = [], []
 features_X = np.array(df)
@@ -61,13 +60,24 @@ labels_y = np.array(df["Class"])
 print(feature_names)
 print(features_X[0], labels_y[0])
 
-features_X = features_X[:, [0,1,2,3,4,5]]
-# los 2 puntos significa TODOS LOS REGISTROS  Y  SOLO OCUPARÁ las columnas 1 pClass, 4 age, 10 sex
-feature_names = feature_names[[0,1,2,3,4,5]]
+features_X = features_X[:, [1,2,3,4,5,6,7]]
+
+
+# los 2 puntos significa TODOS LOS REGISTROS  Y  SOLO OCUPARÁ las columnas
+feature_names = feature_names[[1,2,3,4,5,6,7]]
+print(feature_names)
+
 # solo elige  solo dejar los encabezados de las mismas columnas escogidas
 
 
+
 X_train, X_test, y_train, y_test = train_test_split(features_X, labels_y, test_size=0.25, random_state=33)
+
+
+
+entrenamiento = pd.DataFrame(X_train)
+entrenamiento.to_csv("entrenamiento.csv")
+
 
 clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=3,min_samples_leaf=5)
 clf = clf.fit(X_train,y_train)
@@ -146,15 +156,15 @@ def Predice(X, clf):
 # Datos a ingregar para que los prediga el árbol de Decision
 valores = pd.DataFrame(
                     [
-                        (0,    1,    1,    1,    1,    0),
-                        (0,    1,    1,    1,    0,    1),
-                        (0,    0,    0,    1,    0,    1),
-                        (0,    0,    0,    1,    0,    1)
+                        (200000,0,    1,    1,    1,    1,    0),
+                        (200001,0,    1,    1,    1,    0,    1),
+                        (200002,0,    0,    0,    1,    0,    1),
+                        (200003,0,    0,    0,    1,    0,    1)
                     ]
                      ,columns=feature_names)
 
 Predice(valores,clf)
 
-print("Fin el Pograma de Python, @Bento Sanchez")
+print("Fin el Pograma de Python, @Benito Sanchez")
 
 
